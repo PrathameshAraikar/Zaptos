@@ -12,6 +12,10 @@
 		4FCA144C284CBE5F00554A89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FCA144B284CBE5F00554A89 /* Assets.xcassets */; };
 		4FCA144F284CBE5F00554A89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FCA144E284CBE5F00554A89 /* Preview Assets.xcassets */; };
 		4FCA1456284CBF4100554A89 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FCA1455284CBF4100554A89 /* Launch Screen.storyboard */; };
+		4FCA145D284CCA3C00554A89 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA145C284CCA3C00554A89 /* K.swift */; };
+		4FCA1464284CD5F600554A89 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1463284CD5F600554A89 /* MainView.swift */; };
+		4FCA1466284CD60400554A89 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1465284CD60400554A89 /* OnboardingView.swift */; };
+		4FCA1468284CE05900554A89 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1467284CE05900554A89 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,10 @@
 		4FCA144B284CBE5F00554A89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FCA144E284CBE5F00554A89 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4FCA1455284CBF4100554A89 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		4FCA145C284CCA3C00554A89 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		4FCA1463284CD5F600554A89 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4FCA1465284CD60400554A89 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		4FCA1467284CE05900554A89 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,11 +61,14 @@
 		4FCA1446284CBE5E00554A89 /* Zaptos */ = {
 			isa = PBXGroup;
 			children = (
+				4FCA1462284CCAE500554A89 /* Models */,
+				4FCA1461284CCADD00554A89 /* ViewModel */,
+				4FCA1460284CCAD400554A89 /* Views */,
 				4FCA1447284CBE5E00554A89 /* ZaptosApp.swift */,
-				4FCA1449284CBE5E00554A89 /* ContentView.swift */,
 				4FCA144B284CBE5F00554A89 /* Assets.xcassets */,
 				4FCA144D284CBE5F00554A89 /* Preview Content */,
 				4FCA1455284CBF4100554A89 /* Launch Screen.storyboard */,
+				4FCA145C284CCA3C00554A89 /* K.swift */,
 			);
 			path = Zaptos;
 			sourceTree = "<group>";
@@ -68,6 +79,31 @@
 				4FCA144E284CBE5F00554A89 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4FCA1460284CCAD400554A89 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4FCA1449284CBE5E00554A89 /* ContentView.swift */,
+				4FCA1463284CD5F600554A89 /* MainView.swift */,
+				4FCA1465284CD60400554A89 /* OnboardingView.swift */,
+				4FCA1467284CE05900554A89 /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4FCA1461284CCADD00554A89 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4FCA1462284CCAE500554A89 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,7 +177,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FCA1468284CE05900554A89 /* LoginView.swift in Sources */,
+				4FCA145D284CCA3C00554A89 /* K.swift in Sources */,
+				4FCA1464284CD5F600554A89 /* MainView.swift in Sources */,
 				4FCA144A284CBE5E00554A89 /* ContentView.swift in Sources */,
+				4FCA1466284CD60400554A89 /* OnboardingView.swift in Sources */,
 				4FCA1448284CBE5E00554A89 /* ZaptosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
