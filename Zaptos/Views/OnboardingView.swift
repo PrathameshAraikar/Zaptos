@@ -12,7 +12,7 @@ struct OnboardingView: View {
         TabView {
             Item1(imageName: "ZaptosLogo", title: "WELCOME TO ZAPTOS", description: "")
             
-            Item2(imageName: "ShoeImage", title: "Hello World", description: "If you haven’t got a good pair of shoes, then you haven’t got any.")
+            Item2(imageName: "ShoeImage", title: "Elegance you wear", description: "If you haven’t got a good pair of shoes, then you haven’t got any.")
             
             Item3(imageName: "DP Logo", title: "Made By")
         }
