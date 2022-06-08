@@ -8,33 +8,47 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @State var isShowingMenu: Bool = false
+    @EnvironmentObject var vm: ShoeViewModel
         
     var body: some View {
         NavigationView {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
-                ScrollView(.vertical, showsIndicators: false) {
-                    FlagshipView(brandName: "Adidas")
-                    FlagshipView(brandName: "Nike")
-                    FlagshipView(brandName: "Puma")
+                if isShowingMenu {
+                    SideMenuView(isShowingMenu: $isShowingMenu)
                 }
+                
+                ScrollView(.vertical, showsIndicators: false) {
+                    FlagshipView(brandName: "Nike", shoeArray: vm.allNikeShoes)
+                    FlagshipView(brandName: "Adidas", shoeArray: vm.allAdidasShoes)
+                    FlagshipView(brandName: "Puma", shoeArray: vm.allPumaShoes)
+                }
+                .cornerRadius(isShowingMenu ? 25 : 0)
+                .offset(
+                    x: isShowingMenu ? 300 : 0,
+                    y: isShowingMenu ? 44 : 0)
+                .scaleEffect(isShowingMenu ? 0.8 : 1)
             }
             .navigationTitle("Home")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        // action
+                        withAnimation(.spring()) {
+                            isShowingMenu.toggle()
+                        }
                     } label: {
                         Image(systemName: "line.3.horizontal")
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        // action
+                    NavigationLink {
+                        SearchView()
                     } label: {
-                    Image(systemName: "magnifyingglass")
-                        .padding(.trailing, 25)
+                        Image(systemName: "magnifyingglass")
+                            .padding(.trailing, 25)
                     }
                 }
                 
@@ -42,7 +56,7 @@ struct MainView: View {
                     Button {
                         // action
                     } label: {
-                    Image(systemName: "cart")
+                        Image(systemName: "cart")
                     }
                 }
             }
@@ -50,16 +64,20 @@ struct MainView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-            .preferredColorScheme(.dark)
-    }
-}
+//struct HomeView: View {
+//
+//    @StateObject var vm = ShoeViewModel()
+//    //    @StateObject var vm = ShoeViewModelCombine()
+//
+//    var body: some View {
+//
+//    }
+//}
 
 struct FlagshipView: View {
     
     let brandName: String
+    let shoeArray: [ShoeModel]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -70,22 +88,16 @@ struct FlagshipView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(0..<15) { rect in
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.accentColor.opacity(0.5))
-                            .frame(width: 200, height: 250)
-                            .padding(.trailing, 40)
-                        
+                    ForEach(shoeArray) { shoe in
+                       ShoeCardView(shoe: shoe)
                     }
+                    .padding(.trailing, 30)
                 }
             }
         }
         .padding()
     }
 }
-
-// This is an extension of Navigation View from UI Kit
-// with the help of this func we can change the backgroundColor of the navBar and textColor of navBar as required...
 
 extension UINavigationController {
     override open func viewDidLoad() {
@@ -99,8 +111,41 @@ extension UINavigationController {
     }
 }
 
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
+            .environmentObject(ShoeViewModel())
+    }
+}
+
+//RoundedRectangle(cornerRadius: 20)
+//    .fill(Color.accentColor.opacity(0.5))
+//    .frame(width: 200, height: 250)
+//    .overlay(content: {
+//        VStack(spacing: 10.0) {
+//            Text(shoe.title)
+//                .foregroundColor(.accentColor)
+//
+//            Text(shoe.price)
+//                .foregroundColor(.accentColor)
+//        }
+//    })
+//    .padding(.trailing, 40)
+
+//ForEach(0..<15) { rect in
+//    RoundedRectangle(cornerRadius: 20)
+//        .fill(Color.accentColor.opacity(0.5))
+//        .frame(width: 200, height: 250)
+//        .padding(.trailing, 40)
+//
+//}
+
+// This is an extension of Navigation View from UI Kit
+// with the help of this func we can change the backgroundColor of the navBar and textColor of navBar as required...
+
 // This function is used to change the Navigation Title ONLY...
 
 //    init() {
 //        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.init(Color(#colorLiteral(red: 0.8335181475, green: 0.725478828, blue: 0.4544145465, alpha: 1)))]
 //    }
+

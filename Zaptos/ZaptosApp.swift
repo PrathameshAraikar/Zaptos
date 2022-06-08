@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct ZaptosApp: App {
+    
+    @StateObject var vm: ShoeViewModel = ShoeViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(vm)
         }
+        
     }
 }

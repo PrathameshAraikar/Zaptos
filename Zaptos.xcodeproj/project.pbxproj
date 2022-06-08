@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F5165BE284FD2F000B43312 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5165BD284FD2F000B43312 /* SearchView.swift */; };
+		4F5165C0284FD36600B43312 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5165BF284FD36600B43312 /* SearchBarView.swift */; };
+		4FB1B0E5284F1BF400316FF0 /* ShoeViewModelCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB1B0E4284F1BF400316FF0 /* ShoeViewModelCombine.swift */; };
+		4FB1B0E7284F22B300316FF0 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB1B0E6284F22B300316FF0 /* temp.swift */; };
+		4FC710882850704D00906548 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC710872850704D00906548 /* UIApplication.swift */; };
 		4FCA1448284CBE5E00554A89 /* ZaptosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1447284CBE5E00554A89 /* ZaptosApp.swift */; };
 		4FCA144A284CBE5E00554A89 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1449284CBE5E00554A89 /* ContentView.swift */; };
 		4FCA144C284CBE5F00554A89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FCA144B284CBE5F00554A89 /* Assets.xcassets */; };
@@ -16,9 +21,21 @@
 		4FCA1464284CD5F600554A89 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1463284CD5F600554A89 /* MainView.swift */; };
 		4FCA1466284CD60400554A89 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1465284CD60400554A89 /* OnboardingView.swift */; };
 		4FCA1468284CE05900554A89 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1467284CE05900554A89 /* LoginView.swift */; };
+		4FF98C44284E78AF0068EBAD /* ShoeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF98C43284E78AF0068EBAD /* ShoeModel.swift */; };
+		4FF98C46284E78FF0068EBAD /* ShoeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF98C45284E78FF0068EBAD /* ShoeViewModel.swift */; };
+		4FFDC952284F623600A11570 /* ShoeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFDC951284F623600A11570 /* ShoeCardView.swift */; };
+		4FFDC954284F706B00A11570 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFDC953284F706B00A11570 /* SideMenuView.swift */; };
+		4FFDC956284F70DA00A11570 /* SideMenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFDC955284F70DA00A11570 /* SideMenuHeader.swift */; };
+		4FFDC958284F711900A11570 /* SideMenuOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFDC957284F711900A11570 /* SideMenuOptions.swift */; };
+		4FFDC95A284F713D00A11570 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFDC959284F713C00A11570 /* SideMenuViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F5165BD284FD2F000B43312 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		4F5165BF284FD36600B43312 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		4FB1B0E4284F1BF400316FF0 /* ShoeViewModelCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeViewModelCombine.swift; sourceTree = "<group>"; };
+		4FB1B0E6284F22B300316FF0 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
+		4FC710872850704D00906548 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		4FCA1444284CBE5E00554A89 /* Zaptos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zaptos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCA1447284CBE5E00554A89 /* ZaptosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaptosApp.swift; sourceTree = "<group>"; };
 		4FCA1449284CBE5E00554A89 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -29,6 +46,13 @@
 		4FCA1463284CD5F600554A89 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4FCA1465284CD60400554A89 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		4FCA1467284CE05900554A89 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4FF98C43284E78AF0068EBAD /* ShoeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeModel.swift; sourceTree = "<group>"; };
+		4FF98C45284E78FF0068EBAD /* ShoeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeViewModel.swift; sourceTree = "<group>"; };
+		4FFDC951284F623600A11570 /* ShoeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeCardView.swift; sourceTree = "<group>"; };
+		4FFDC953284F706B00A11570 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		4FFDC955284F70DA00A11570 /* SideMenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuHeader.swift; sourceTree = "<group>"; };
+		4FFDC957284F711900A11570 /* SideMenuOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptions.swift; sourceTree = "<group>"; };
+		4FFDC959284F713C00A11570 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +93,8 @@
 				4FCA144D284CBE5F00554A89 /* Preview Content */,
 				4FCA1455284CBF4100554A89 /* Launch Screen.storyboard */,
 				4FCA145C284CCA3C00554A89 /* K.swift */,
+				4FB1B0E6284F22B300316FF0 /* temp.swift */,
+				4FC710872850704D00906548 /* UIApplication.swift */,
 			);
 			path = Zaptos;
 			sourceTree = "<group>";
@@ -88,6 +114,12 @@
 				4FCA1463284CD5F600554A89 /* MainView.swift */,
 				4FCA1465284CD60400554A89 /* OnboardingView.swift */,
 				4FCA1467284CE05900554A89 /* LoginView.swift */,
+				4FFDC951284F623600A11570 /* ShoeCardView.swift */,
+				4FFDC953284F706B00A11570 /* SideMenuView.swift */,
+				4FFDC955284F70DA00A11570 /* SideMenuHeader.swift */,
+				4FFDC957284F711900A11570 /* SideMenuOptions.swift */,
+				4F5165BD284FD2F000B43312 /* SearchView.swift */,
+				4F5165BF284FD36600B43312 /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -95,6 +127,9 @@
 		4FCA1461284CCADD00554A89 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4FF98C45284E78FF0068EBAD /* ShoeViewModel.swift */,
+				4FB1B0E4284F1BF400316FF0 /* ShoeViewModelCombine.swift */,
+				4FFDC959284F713C00A11570 /* SideMenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -102,6 +137,7 @@
 		4FCA1462284CCAE500554A89 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4FF98C43284E78AF0068EBAD /* ShoeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -177,12 +213,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FC710882850704D00906548 /* UIApplication.swift in Sources */,
 				4FCA1468284CE05900554A89 /* LoginView.swift in Sources */,
+				4FF98C46284E78FF0068EBAD /* ShoeViewModel.swift in Sources */,
 				4FCA145D284CCA3C00554A89 /* K.swift in Sources */,
 				4FCA1464284CD5F600554A89 /* MainView.swift in Sources */,
+				4FFDC958284F711900A11570 /* SideMenuOptions.swift in Sources */,
+				4FB1B0E5284F1BF400316FF0 /* ShoeViewModelCombine.swift in Sources */,
 				4FCA144A284CBE5E00554A89 /* ContentView.swift in Sources */,
+				4FFDC954284F706B00A11570 /* SideMenuView.swift in Sources */,
+				4FF98C44284E78AF0068EBAD /* ShoeModel.swift in Sources */,
+				4FFDC956284F70DA00A11570 /* SideMenuHeader.swift in Sources */,
+				4FFDC952284F623600A11570 /* ShoeCardView.swift in Sources */,
 				4FCA1466284CD60400554A89 /* OnboardingView.swift in Sources */,
+				4F5165BE284FD2F000B43312 /* SearchView.swift in Sources */,
 				4FCA1448284CBE5E00554A89 /* ZaptosApp.swift in Sources */,
+				4FFDC95A284F713D00A11570 /* SideMenuViewModel.swift in Sources */,
+				4F5165C0284FD36600B43312 /* SearchBarView.swift in Sources */,
+				4FB1B0E7284F22B300316FF0 /* temp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
