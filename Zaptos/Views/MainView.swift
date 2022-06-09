@@ -11,7 +11,7 @@ struct MainView: View {
     
     @State var isShowingMenu: Bool = false
     @EnvironmentObject var vm: ShoeViewModel
-        
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -64,16 +64,6 @@ struct MainView: View {
     }
 }
 
-//struct HomeView: View {
-//
-//    @StateObject var vm = ShoeViewModel()
-//    //    @StateObject var vm = ShoeViewModelCombine()
-//
-//    var body: some View {
-//
-//    }
-//}
-
 struct FlagshipView: View {
     
     let brandName: String
@@ -89,7 +79,12 @@ struct FlagshipView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(shoeArray) { shoe in
-                       ShoeCardView(shoe: shoe)
+                        NavigationLink {
+                            DescriptionView(shoe: shoe)
+                        } label: {
+                            ShoeCardView(shoe: shoe)
+                                .foregroundColor(.primary)
+                        }
                     }
                     .padding(.trailing, 30)
                 }

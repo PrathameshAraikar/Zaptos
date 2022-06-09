@@ -11,6 +11,7 @@
 		4F5165C0284FD36600B43312 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5165BF284FD36600B43312 /* SearchBarView.swift */; };
 		4FB1B0E5284F1BF400316FF0 /* ShoeViewModelCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB1B0E4284F1BF400316FF0 /* ShoeViewModelCombine.swift */; };
 		4FB1B0E7284F22B300316FF0 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB1B0E6284F22B300316FF0 /* temp.swift */; };
+		4FB7A69D2851BDE300605563 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7A69C2851BDE300605563 /* DescriptionView.swift */; };
 		4FC710882850704D00906548 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC710872850704D00906548 /* UIApplication.swift */; };
 		4FCA1448284CBE5E00554A89 /* ZaptosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1447284CBE5E00554A89 /* ZaptosApp.swift */; };
 		4FCA144A284CBE5E00554A89 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA1449284CBE5E00554A89 /* ContentView.swift */; };
@@ -35,6 +36,7 @@
 		4F5165BF284FD36600B43312 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		4FB1B0E4284F1BF400316FF0 /* ShoeViewModelCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeViewModelCombine.swift; sourceTree = "<group>"; };
 		4FB1B0E6284F22B300316FF0 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
+		4FB7A69C2851BDE300605563 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		4FC710872850704D00906548 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		4FCA1444284CBE5E00554A89 /* Zaptos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zaptos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCA1447284CBE5E00554A89 /* ZaptosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaptosApp.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				4FFDC957284F711900A11570 /* SideMenuOptions.swift */,
 				4F5165BD284FD2F000B43312 /* SearchView.swift */,
 				4F5165BF284FD36600B43312 /* SearchBarView.swift */,
+				4FB7A69C2851BDE300605563 /* DescriptionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				4FCA1464284CD5F600554A89 /* MainView.swift in Sources */,
 				4FFDC958284F711900A11570 /* SideMenuOptions.swift in Sources */,
 				4FB1B0E5284F1BF400316FF0 /* ShoeViewModelCombine.swift in Sources */,
+				4FB7A69D2851BDE300605563 /* DescriptionView.swift in Sources */,
 				4FCA144A284CBE5E00554A89 /* ContentView.swift in Sources */,
 				4FFDC954284F706B00A11570 /* SideMenuView.swift in Sources */,
 				4FF98C44284E78AF0068EBAD /* ShoeModel.swift in Sources */,

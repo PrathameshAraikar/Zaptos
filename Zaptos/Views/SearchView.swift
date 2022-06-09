@@ -18,17 +18,32 @@ struct SearchView: View {
                 SearchBarView(searchBarText: $vm.searchBarText)
                 VStack {
                     ForEach(vm.allAdidasShoes.filter({"\($0)".contains(vm.searchBarText)})) { shoe in
-                        ShoeCardView(shoe: shoe)
+                        NavigationLink {
+                            DescriptionView(shoe: shoe)
+                        } label: {
+                            ShoeCardView(shoe: shoe)
+                                .foregroundColor(.primary)
+                        }
                     }
                     .padding(.bottom, 30)
                     
                     ForEach(vm.allNikeShoes.filter({"\($0)".contains(vm.searchBarText)})) { shoe in
-                        ShoeCardView(shoe: shoe)
+                        NavigationLink {
+                            DescriptionView(shoe: shoe)
+                        } label: {
+                            ShoeCardView(shoe: shoe)
+                                .foregroundColor(.primary)
+                        }
                     }
                     .padding(.bottom, 30)
                     
                     ForEach(vm.allPumaShoes.filter({"\($0)".contains(vm.searchBarText)})) { shoe in
-                        ShoeCardView(shoe: shoe)
+                        NavigationLink {
+                            DescriptionView(shoe: shoe)
+                        } label: {
+                            ShoeCardView(shoe: shoe)
+                                .foregroundColor(.primary)
+                        }
                     }
                     .padding(.bottom, 30)
                 }
