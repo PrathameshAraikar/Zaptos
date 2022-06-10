@@ -10,6 +10,10 @@ import Foundation
 struct ShoeModel: Codable, Identifiable {
     let imageurl: String
     let price, title: String
+    let shoeSize: Int?
+    let quantity: Int?
     var id = UUID().uuidString
 }
 
+
+var checkoutShoes: [ShoeModel] = []

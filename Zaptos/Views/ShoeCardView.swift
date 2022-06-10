@@ -56,6 +56,6 @@ struct ShoeCardView_Previews: PreviewProvider {
         ShoeCardView(shoe:
                         ShoeModel(
                             imageurl:"https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a9cf6d9e5fd048c181b4ad7b01818f17_9366/Humanrace_Sichona_Shoes_Black_GX3032_01_standard.jpg", price: "₹16,999.00",
-                            title: "HUMANRACE SICHONA SHOES"))
+                            title: "HUMANRACE SICHONA SHOES", shoeSize: nil, quantity: nil))
     }
 }

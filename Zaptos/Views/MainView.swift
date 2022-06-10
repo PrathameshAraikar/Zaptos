@@ -48,16 +48,22 @@ struct MainView: View {
                         SearchView()
                     } label: {
                         Image(systemName: "magnifyingglass")
-                            .padding(.trailing, 25)
+                            .padding(.trailing, 10)
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        // action
+                    NavigationLink {
+                        CartView()
                     } label: {
                         Image(systemName: "cart")
                     }
+
+//                    Button {
+//
+//                    } label: {
+//                        Image(systemName: "cart")
+//                    }
                 }
             }
         }
