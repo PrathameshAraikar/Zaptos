@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     
+    @StateObject var appvm: AppViewModel = AppViewModel()
     @AppStorage("currentUserSignIn") var currentUserSignIn: Bool = false
     @AppStorage("userCompletedOnBoarding") var userCompletedOnBoarding: Bool = true
     @AppStorage("userOnLoginScreen") var userOnLoginScreen: Bool = true
@@ -64,6 +65,8 @@ struct LoginView: View {
                                 .cornerRadius(20)
                                 .foregroundColor(.white)
                                 .padding()
+                                .disableAutocorrection(true)
+                                .textInputAutocapitalization(.never)
                             
                             Divider()
                             
@@ -96,6 +99,9 @@ struct LoginView: View {
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(20)
                                         .padding()
+                                        .disableAutocorrection(true)
+                                        .textInputAutocapitalization(.never)
+                                    
                                 } else {
                                     SecureField("", text: $password)
                                         .placeholder(when: password.isEmpty, placeholder: {
@@ -109,15 +115,17 @@ struct LoginView: View {
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(20)
                                         .padding()
+                                        .disableAutocorrection(true)
+                                        .textInputAutocapitalization(.never)
                                 }
                                 
                                 Button {
                                     showPassword.toggle()
                                 } label: {
-                                    Image(systemName: showPassword ? "eye.fill" : "eye.slash.fill")
+                                    Image(systemName: showPassword ? "eye.slash.fill" : "eye.fill")
                                         .resizable()
                                         .scaledToFit()
-                                        .foregroundColor( showPassword ? .green : .white)
+                                        .foregroundColor( showPassword ? .white : .green)
                                         .frame(width: 30, height: 30)
                                 }
                             }
@@ -174,6 +182,8 @@ struct LoginView: View {
 
 extension LoginView {
     func handleLoginButtonPressed() {
+        
+        appvm.login(email: email, password: password)
         
         withAnimation(.spring()) {
             currentUserSignIn = true

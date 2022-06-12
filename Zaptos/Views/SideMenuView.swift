@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SideMenuView: View {
     
+    @StateObject var appvm: AppViewModel = AppViewModel()
     @Binding var isShowingMenu: Bool
     @AppStorage("currentUserSignIn") var currentUserSignIn: Bool = true
         
@@ -51,6 +52,7 @@ struct SideMenuView: View {
                     .padding(.top)
                     .onTapGesture {
                         withAnimation(.spring()) {
+                            appvm.signOut()
                             currentUserSignIn = false
                         }
                     }

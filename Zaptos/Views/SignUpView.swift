@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SignUpView: View {
     
+    @StateObject var appvm: AppViewModel = AppViewModel()
     @AppStorage("currentUserSignIn") var currentUserSignIn: Bool = false
     @AppStorage("userOnLoginScreen") var userOnLoginScreen: Bool = false
     @Binding var onBoardingState: Int
@@ -63,6 +64,8 @@ struct SignUpView: View {
                                 .cornerRadius(20)
                                 .foregroundColor(.white)
                                 .padding()
+                                .disableAutocorrection(true)
+                                .textInputAutocapitalization(.never)
                                 
                             Divider()
                             
@@ -96,6 +99,8 @@ struct SignUpView: View {
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(20)
                                         .padding()
+                                        .disableAutocorrection(true)
+                                        .textInputAutocapitalization(.never)
                                 } else {
                                     SecureField("", text: $password)
                                         .placeholder(when: password.isEmpty, placeholder: {
@@ -109,15 +114,17 @@ struct SignUpView: View {
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(20)
                                         .padding()
+                                        .disableAutocorrection(true)
+                                        .textInputAutocapitalization(.never)
                                 }
                                 
                                 Button {
                                     showPassword.toggle()
                                 } label: {
-                                    Image(systemName: showPassword ? "eye.fill" : "eye.slash.fill")
+                                    Image(systemName: showPassword ? "eye.slash.fill" : "eye.fill")
                                         .resizable()
                                         .scaledToFit()
-                                        .foregroundColor( showPassword ? .green : .white)
+                                        .foregroundColor( showPassword ? .white : .green)
                                         .frame(width: 30, height: 30)
                                 }
                             }
@@ -176,6 +183,9 @@ struct SignUpView: View {
 extension SignUpView {
     
     func handleSignUpButtonPressed() {
+        
+        appvm.signUp(email: email, password: password)
+        
         withAnimation(.spring()) {
             currentUserSignIn = true
         }
