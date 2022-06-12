@@ -11,9 +11,9 @@ struct ShoeModel: Codable, Identifiable {
     let imageurl: String
     let price, title: String
     let shoeSize: Int?
-    let quantity: Int?
+    var quantity: Int?
     var id = UUID().uuidString
 }
 
 
-var checkoutShoes: [ShoeModel] = []
+//var checkoutShoes: [ShoeModel] = []

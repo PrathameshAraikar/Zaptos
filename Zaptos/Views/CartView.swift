@@ -14,17 +14,16 @@ struct CartView: View {
     var body: some View {
         ZStack {
             Color("BackgroundColor").ignoresSafeArea()
-            ScrollView(.vertical, showsIndicators: true) {
-                if let cartShoes =  vm.shoesInCart {
-                    if cartShoes.isEmpty {
-                        EmptyCartView()
-                    } else {
+            if let cartShoes =  vm.shoesInCart {
+                if cartShoes.isEmpty {
+                    EmptyCartView()
+                } else {
+                    ScrollView(.vertical, showsIndicators: true) {
                         ForEach(cartShoes, id: \.id) { shoe in
                             CartCardView(shoe: shoe)
                                 .padding(.bottom)
-                            
+
                         }
-                        
                     }
                 }
             }
@@ -42,18 +41,23 @@ struct CartView_Previews: PreviewProvider {
 
 struct EmptyCartView: View {
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             Image(systemName: "cart.badge.plus")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 300, height: 300)
+                .frame(width: 200, height: 200)
                 .foregroundColor(.accentColor)
-                .padding(.top, 100)
+                .padding(.top)
             
             Text("Empty Cart!!")
-                .font(.system(size: 55))
+                .font(.system(size: 35))
                 .fontWeight(.semibold)
                 .foregroundColor(.accentColor)
+                .padding()
+            
+            Text("Click Add to Cart button to view items here...")
+                .foregroundColor(.accentColor)
+                .fontWeight(.light)
             
         }
     }

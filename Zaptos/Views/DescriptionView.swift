@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct DescriptionView: View {
-    
+
     @EnvironmentObject var vm: ShoeViewModel
     @State var showConfirmation: Bool = false
     @State var shoeSize: Int = 0
+    @State var quantity: Int = 1
     let shoe: ShoeModel
     
     var body: some View {
+        
         ZStack(alignment: .top) {
             Color("BackgroundColor").ignoresSafeArea()
             
-            VStack(spacing: 20) {
+            VStack {
                 let url = URL(string: shoe.imageurl)
                 AsyncImage(url: url) { phase in
                     switch phase {
@@ -85,9 +87,27 @@ struct DescriptionView: View {
                 .font(.title2)
                 .foregroundColor(.white)
                 .padding(.leading, 25)
-                .padding(.bottom)
+                .padding(.bottom, 90)
                 
-                Spacer()
+//                HStack {
+//                    Text("Quantity: ")
+//                        .font(.title2)
+//                        .foregroundColor(.white)
+//
+//                    Text("\(quantity)")
+//                        .font(.title2)
+//                        .foregroundColor(.white)
+//                        .fontWeight(.semibold)
+//                        .padding(.trailing, 50)
+//
+//                    Stepper(value: $quantity, in: 1...10) {}
+//                        .frame(width: 95)
+//                        .background(Color.accentColor)
+//                        .cornerRadius(10)
+//
+//                    Spacer()
+//                }
+//                .padding(.leading, 25)
                 
                 Button {
                     showConfirmation.toggle()
@@ -100,9 +120,8 @@ struct DescriptionView: View {
                         .background(Color("DP Color"))
                         .cornerRadius(16)
                         .shadow(color: .accentColor, radius: 4, x: 0, y: 0)
-                        .padding(.top, 30)
-                        .padding(.leading, 30)
-                        .padding(.trailing, 30)
+                        .padding(.top)
+                        .padding(.horizontal, 30)
                 }
                 .confirmationDialog("Are You Sure?", isPresented: $showConfirmation, titleVisibility: .visible) {
                     Button(role: .none) {
@@ -111,7 +130,7 @@ struct DescriptionView: View {
                                       price: shoe.price,
                                       title: shoe.title,
                                       shoeSize: (shoeSize + 5),
-                                      quantity: 1))
+                                      quantity: quantity))
                     } label: {
                         Text("OK")
                     }

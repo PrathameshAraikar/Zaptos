@@ -15,9 +15,8 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)), Color(#colorLiteral(red: 0.5818830132, green: 0.2156915367, blue: 1, alpha: 1))],
-                           startPoint: .topLeading,
-                           endPoint: .bottomTrailing).ignoresSafeArea()
+            Color("BackgroundColor")
+                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 30.0) {
                 Image("ZaptosLogo")
@@ -44,7 +43,7 @@ struct LoginView: View {
                                 .frame(height: 55)
                                 .frame(maxWidth: .infinity)
                                 .padding(.horizontal)
-                                .background(.gray.opacity(0.3))
+                                .background(Color.gray.opacity(0.3))
                                 .font(.headline)
                                 .cornerRadius(20)
                                 .shadow(radius: 10)
@@ -55,7 +54,7 @@ struct LoginView: View {
                                 .frame(height: 55)
                                 .frame(maxWidth: .infinity)
                                 .padding(.horizontal)
-                                .background(.gray.opacity(0.3))
+                                .background(Color.gray.opacity(0.3))
                                 .font(.headline)
                                 .cornerRadius(20)
                                 .shadow(radius: 10)
@@ -63,26 +62,9 @@ struct LoginView: View {
                             
                         }
                     )
-                Button {
-                    withAnimation(.spring()) {
-                        currentUserSignIn = true
-                    }
-                } label: {
-                    Text("Sign Up")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .frame(height: 55)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.purple)
-                        .background(.white)
-                        .cornerRadius(20)
-                        .padding()
-                        .shadow(radius: 10)
-                }
             }
             .padding()
         }
-        .indexViewStyle(.page(backgroundDisplayMode: .never))
     }
 }
 

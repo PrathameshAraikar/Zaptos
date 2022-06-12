@@ -10,12 +10,13 @@ import SwiftUI
 struct SideMenuView: View {
     
     @Binding var isShowingMenu: Bool
+    @AppStorage("currentUserSignIn") var currentUserSignIn: Bool = true
         
         var body: some View {
             ZStack {
                 LinearGradient(colors: [Color(#colorLiteral(red: 0.1197352782, green: 0.1297318339, blue: 0.133856982, alpha: 1)), Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 
-                VStack {
+                VStack(alignment: .leading) {
                     // Header
                     SideMenuHeader(isShowingMenu: $isShowingMenu)
                         .foregroundColor(.accentColor)
@@ -32,6 +33,28 @@ struct SideMenuView: View {
                         }
 
                     }
+                    
+                    HStack {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24, height: 24)
+                            .padding(.trailing)
+                        
+                        Text("Sign Out")
+                            .font(.system(size: 20))
+                            .fontWeight(.semibold)
+                        
+                    }
+                    .foregroundColor(.accentColor)
+                    .padding(.leading, 20)
+                    .padding(.top)
+                    .onTapGesture {
+                        withAnimation(.spring()) {
+                            currentUserSignIn = false
+                        }
+                    }
+                    
                     Spacer()
                 }
                 .navigationBarHidden(true)

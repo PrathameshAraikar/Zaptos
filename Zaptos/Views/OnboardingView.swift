@@ -8,16 +8,89 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
+    @State var onboardingState: Int = 0
+    
+    let transition: AnyTransition = .asymmetric(
+        insertion: .move(edge: .trailing),
+        removal: .move(edge: .leading))
+    
+    @AppStorage("currentUserSignIn") var currentUserSignIn: Bool = false
+    
     var body: some View {
-        TabView {
-            Item1(imageName: "ZaptosLogo", title: "WELCOME TO ZAPTOS", description: "")
+        ZStack {
+            ZStack {
+                switch onboardingState {
+                case 0:
+                    Item1(imageName: "ZaptosLogo", title: "WELCOME TO ZAPTOS", description: "")
+                        .transition(transition)
+                    
+                case 1:
+                    Item2(imageName: "ShoeImage", title: "Elegance you wear", description: "If you haven’t got a good pair of shoes, then you haven’t got any.")
+                        .transition(transition)
+                    
+                case 2:
+                    Item3(imageName: "DP Logo", title: "Made By")
+                        .transition(transition)
+                    
+                case 3:
+                    LoginView()
+                    
+                default:
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .foregroundColor(.green)
+                }
+            }
             
-            Item2(imageName: "ShoeImage", title: "Elegance you wear", description: "If you haven’t got a good pair of shoes, then you haven’t got any.")
-            
-            Item3(imageName: "DP Logo", title: "Made By")
+            VStack {
+                Spacer()
+                bottomButton
+            }
+            .padding()
         }
-        .tabViewStyle(.page(indexDisplayMode: .always))
-        .indexViewStyle(.page(backgroundDisplayMode: .always))
+        
+    }
+}
+
+extension OnboardingView {
+    
+    private var bottomButton: some View {
+        Text(onboardingState == 0 ? "Next" :
+                onboardingState == 2 ? "Get Started" :
+                    onboardingState == 3 ? "Sign Up" : "Next")
+            .foregroundColor(Color("BackgroundColor"))
+            .font(.system(size: 25))
+            .fontWeight(.semibold)
+            .frame(height: 55)
+            .frame(maxWidth: .infinity)
+            .background(onboardingState == 3 ? Color.white : Color("DP Color"))
+            .cornerRadius(10)
+            .shadow(color: onboardingState == 3 ? Color.white.opacity(0.5) : Color("DP Color").opacity(0.5),
+                    radius: 10,
+                    x: 5,
+                    y: 10)
+            .padding()
+            .onTapGesture {
+                handleNextButtonPressed()
+            }
+    }
+    
+    func handleNextButtonPressed() {
+        
+        // GO TO NEXT SECTION
+        if onboardingState == 3 {
+            signIn()
+        } else {
+            withAnimation(.spring()) {
+                onboardingState += 1
+            }
+        }
+    }
+    
+    func signIn() {
+        withAnimation(.spring()) {
+            currentUserSignIn = true
+        }
     }
 }
 
@@ -33,6 +106,7 @@ struct Item1: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .center, spacing: 20.0) {
+                Spacer()
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
@@ -46,6 +120,9 @@ struct Item1: View {
                     .font(.system(.title, design: .serif))
                     .foregroundColor(.white)
                     .shadow(color: .gray, radius: 10, x: 0, y: 0)
+                
+                Spacer()
+                Spacer()
                 
             }
         }
@@ -64,6 +141,7 @@ struct Item2: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .center, spacing: 20.0) {
+                Spacer()
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
@@ -83,6 +161,9 @@ struct Item2: View {
                     .shadow(color: .gray.opacity(0.5), radius: 10, x: 5, y: 10)
                     .padding()
                     .multilineTextAlignment(.center)
+                
+                Spacer()
+                Spacer()
             }
         }
     }
@@ -113,45 +194,20 @@ struct Item3: View {
                     .frame(width: 400, height: 350)
                 
                 Spacer()
-                
-                Button {
-                    withAnimation {
-                        showLoginView = true
-                    }
-                } label: {
-                    Text("Get Started")
-                        .foregroundColor(Color("BackgroundColor"))
-                        .font(.system(size: 25))
-                        .fontWeight(.semibold)
-                        .frame(height: 55)
-                        .frame(maxWidth: .infinity)
-                        .background(Color("DP Color"))
-                        .cornerRadius(10)
-                        .shadow(color: Color("DP Color").opacity(0.5), radius: 10, x: 5, y: 10)
-                        .padding()
-                }
-                .padding()
-                
                 Spacer()
-            }
-        }
-        .overlay {
-            Group {
-                if showLoginView {
-                    LoginView()
-                        .transition(.move(edge: .bottom))
-                }
+                
             }
         }
     }
 }
 
+
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        //        OnboardingView()
-        Item1(imageName: "ZaptosLogo", title: "WELCOME TO ZAPTOS", description: "")
-        Item2(imageName: "ShoeImage", title: "Hello World", description: "If you haven’t got a good pair of shoes, then you haven’t got any.")
-        Item3(imageName: "DP Logo", title: "Made By")
+        OnboardingView()
+        //        Item1(imageName: "ZaptosLogo", title: "WELCOME TO ZAPTOS", description: "")
+        //        Item2(imageName: "ShoeImage", title: "Hello World", description: "If you haven’t got a good pair of shoes, then you haven’t got any.")
+        //        Item3(imageName: "DP Logo", title: "Made By")
     }
 }
 

@@ -13,12 +13,13 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            Color("BackgroundColor").ignoresSafeArea()
             if currentUserSignIn {
                 MainView()
             } else {
                 OnboardingView()
                     .transition(.move(edge: .trailing))
-                    .ignoresSafeArea()
+//                    .ignoresSafeArea()
             }
         }
     }
@@ -27,5 +28,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(ShoeViewModel())
     }
 }
