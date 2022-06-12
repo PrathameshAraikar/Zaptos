@@ -19,7 +19,6 @@ struct ContentView: View {
             } else {
                 OnboardingView()
                     .transition(.move(edge: .trailing))
-//                    .ignoresSafeArea()
             }
         }
     }

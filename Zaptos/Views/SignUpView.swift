@@ -1,13 +1,13 @@
 //
-//  LoginView.swift
+//  SignUpView.swift
 //  Zaptos
 //
-//  Created by Prathamesh Araikar on 05/06/22.
+//  Created by Prathamesh Araikar on 12/06/22.
 //
 
 import SwiftUI
 
-struct LoginView: View {
+struct SignUpView: View {
     
     @AppStorage("currentUserSignIn") var currentUserSignIn: Bool = false
     @Binding var onBoardingState: Int
@@ -20,7 +20,7 @@ struct LoginView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 30.0) {
-                Text("Login")
+                Text("Sign Up")
                     .font(.system(size: 35))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -61,7 +61,7 @@ struct LoginView: View {
                                 .cornerRadius(20)
                                 .foregroundColor(.white)
                                 .padding()
-                            
+                                
                             Divider()
                             
                             HStack(spacing: 20.0) {
@@ -92,13 +92,13 @@ struct LoginView: View {
                                 .background(Color.gray.opacity(0.1))
                                 .cornerRadius(20)
                                 .padding()
-                            
+                                                        
                             Spacer()
                             
                             Button {
-                                handleLoginButtonPressed()
+                                handleSignUpButtonPressed()
                             } label: {
-                                Text("Login")
+                                Text("Sign Up")
                                     .foregroundColor(Color("BackgroundColor"))
                                     .font(.system(size: 25))
                                     .fontWeight(.semibold)
@@ -118,11 +118,11 @@ struct LoginView: View {
                                     .foregroundColor(.white)
                             }
                             .frame(maxWidth: .infinity)
-                            
+                                
                             Button {
-                                handleSignUpButtonPressed(onBoardingState: onBoardingState)
+                                handleLoginButtonPressed(onBoardingState: onBoardingState)
                             } label: {
-                                Text("Sign Up")
+                                Text("Login")
                                     .foregroundColor(Color("BackgroundColor"))
                                     .font(.system(size: 25))
                                     .fontWeight(.semibold)
@@ -143,40 +143,25 @@ struct LoginView: View {
     }
 }
 
-extension LoginView {
-    func handleLoginButtonPressed() {
-        
+extension SignUpView {
+    
+    func handleSignUpButtonPressed() {
         withAnimation(.spring()) {
             currentUserSignIn = true
         }
     }
     
-    func handleSignUpButtonPressed(onBoardingState: Int) {
+    func handleLoginButtonPressed(onBoardingState: Int) {
+        
         withAnimation(.spring()) {
-            self.onBoardingState += 1
+            self.onBoardingState -= 1
         }
     }
+    
 }
 
-// VVIMP Code to change the placeholder text color
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-            
-            ZStack(alignment: alignment) {
-                placeholder().opacity(shouldShow ? 1 : 0)
-                self
-            }
-        }
-}
-
-struct LoginView_Previews: PreviewProvider {
+struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(onBoardingState: .constant(3))
-        
-        
-        
+        SignUpView(onBoardingState: .constant(2))
     }
 }

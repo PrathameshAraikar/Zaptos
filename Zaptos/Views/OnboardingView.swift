@@ -34,7 +34,12 @@ struct OnboardingView: View {
                         .transition(transition)
                     
                 case 3:
-                    LoginView()
+                    LoginView(onBoardingState: $onboardingState)
+                        .transition(transition)
+                    
+                case 4:
+                    SignUpView(onBoardingState: $onboardingState)
+                        .transition(transition)
                     
                 default:
                     RoundedRectangle(cornerRadius: 25.0)
@@ -44,7 +49,12 @@ struct OnboardingView: View {
             
             VStack {
                 Spacer()
-                bottomButton
+                if onboardingState == 3 || onboardingState == 4 {
+                    bottomButton.hidden()
+                } else {
+                    bottomButton
+                }
+                
             }
             .padding()
         }
@@ -57,39 +67,24 @@ extension OnboardingView {
     private var bottomButton: some View {
         Text(onboardingState == 0 ? "Next" :
                 onboardingState == 2 ? "Get Started" :
-                    onboardingState == 3 ? "Sign Up" : "Next")
-            .foregroundColor(Color("BackgroundColor"))
-            .font(.system(size: 25))
-            .fontWeight(.semibold)
-            .frame(height: 55)
-            .frame(maxWidth: .infinity)
-            .background(onboardingState == 3 ? Color.white : Color("DP Color"))
-            .cornerRadius(10)
-            .shadow(color: onboardingState == 3 ? Color.white.opacity(0.5) : Color("DP Color").opacity(0.5),
-                    radius: 10,
-                    x: 5,
-                    y: 10)
-            .padding()
-            .onTapGesture {
-                handleNextButtonPressed()
-            }
-    }
-    
-    func handleNextButtonPressed() {
-        
-        // GO TO NEXT SECTION
-        if onboardingState == 3 {
-            signIn()
-        } else {
-            withAnimation(.spring()) {
-                onboardingState += 1
-            }
+                onboardingState == 3 ? "Sign Up" : "Next")
+        .foregroundColor(Color("BackgroundColor"))
+        .font(.system(size: 25))
+        .fontWeight(.semibold)
+        .frame(height: 55)
+        .frame(maxWidth: .infinity)
+        .background(onboardingState == 3 ? Color.white : Color("DP Color"))
+        .cornerRadius(10)
+        .shadow(radius: 10)
+        .padding(.vertical)
+        .onTapGesture {
+            handleNextButtonPressed()
         }
     }
     
-    func signIn() {
+    func handleNextButtonPressed() {
         withAnimation(.spring()) {
-            currentUserSignIn = true
+            onboardingState += 1
         }
     }
 }
