@@ -20,7 +20,11 @@ struct SearchBarView: View {
                         searchBarText.isEmpty ? .accentColor.opacity(0.5) : .accentColor
                     )
                 
-                TextField("Search by name or brand...", text: $searchBarText)
+                TextField("", text: $searchBarText)
+                    .placeholder(when: searchBarText.isEmpty, placeholder: {
+                        Text("Search by name or brand...")
+                            .foregroundColor(.gray)
+                    })
                     .foregroundColor(.accentColor)
                     .disableAutocorrection(true)
                     .overlay(alignment: .trailing) {
@@ -39,7 +43,7 @@ struct SearchBarView: View {
             }
             .padding()
             .font(.headline)
-            .background(.ultraThinMaterial)
+            .background(Color.gray.opacity(0.1))
             .cornerRadius(20)
             .padding()
             .shadow(radius: 10)
@@ -54,9 +58,9 @@ struct SearchBarView_Previews: PreviewProvider {
                 .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.light)
             
-            SearchBarView(searchBarText: .constant(""))
-                .previewLayout(.sizeThatFits)
-                .preferredColorScheme(.dark)
+//            SearchBarView(searchBarText: .constant(""))
+//                .previewLayout(.sizeThatFits)
+//                .preferredColorScheme(.dark)
         }
     }
 }

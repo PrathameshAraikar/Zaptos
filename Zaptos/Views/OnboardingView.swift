@@ -78,13 +78,9 @@ extension OnboardingView {
         .shadow(radius: 10)
         .padding(.vertical)
         .onTapGesture {
-            handleNextButtonPressed()
-        }
-    }
-    
-    func handleNextButtonPressed() {
-        withAnimation(.spring()) {
-            onboardingState += 1
+            withAnimation(.spring()) {
+                onboardingState += 1
+            }
         }
     }
 }
