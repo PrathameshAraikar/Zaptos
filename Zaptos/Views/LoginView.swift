@@ -10,9 +10,12 @@ import SwiftUI
 struct LoginView: View {
     
     @AppStorage("currentUserSignIn") var currentUserSignIn: Bool = false
+    @AppStorage("userCompletedOnBoarding") var userCompletedOnBoarding: Bool = true
+    @AppStorage("userOnLoginScreen") var userOnLoginScreen: Bool = true
     @Binding var onBoardingState: Int
     @State var email: String = ""
     @State var password: String = ""
+    @State var showPassword: Bool = false
     
     var body: some View {
         ZStack {
@@ -79,19 +82,45 @@ struct LoginView: View {
                             }
                             .padding(.top)
                             
-                            
-                            SecureField("", text: $password)
-                                .placeholder(when: password.isEmpty, placeholder: {
-                                    Text("123456")
-                                        .foregroundColor(.gray)
-                                })
-                                .frame(height: 55)
-                                .frame(maxWidth: .infinity)
-                                .padding(.horizontal)
-                                .foregroundColor(.white)
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(20)
-                                .padding()
+                            HStack {
+                                if showPassword {
+                                    TextField("", text: $password)
+                                        .placeholder(when: password.isEmpty, placeholder: {
+                                            Text("123456")
+                                                .foregroundColor(.gray)
+                                        })
+                                        .frame(height: 55)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.horizontal)
+                                        .foregroundColor(.white)
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(20)
+                                        .padding()
+                                } else {
+                                    SecureField("", text: $password)
+                                        .placeholder(when: password.isEmpty, placeholder: {
+                                            Text("123456")
+                                                .foregroundColor(.gray)
+                                        })
+                                        .frame(height: 55)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.horizontal)
+                                        .foregroundColor(.white)
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(20)
+                                        .padding()
+                                }
+                                
+                                Button {
+                                    showPassword.toggle()
+                                } label: {
+                                    Image(systemName: showPassword ? "eye.fill" : "eye.slash.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundColor( showPassword ? .green : .white)
+                                        .frame(width: 30, height: 30)
+                                }
+                            }
                             
                             Spacer()
                             
@@ -154,6 +183,8 @@ extension LoginView {
     func handleSignUpButtonPressed(onBoardingState: Int) {
         withAnimation(.spring()) {
             self.onBoardingState += 1
+            userCompletedOnBoarding = true
+            userOnLoginScreen = false
         }
     }
 }

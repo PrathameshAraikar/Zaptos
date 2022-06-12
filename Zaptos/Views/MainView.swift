@@ -58,12 +58,6 @@ struct MainView: View {
                     } label: {
                         Image(systemName: "cart")
                     }
-
-//                    Button {
-//
-//                    } label: {
-//                        Image(systemName: "cart")
-//                    }
                 }
             }
         }

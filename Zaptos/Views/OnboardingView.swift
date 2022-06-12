@@ -16,6 +16,8 @@ struct OnboardingView: View {
         removal: .move(edge: .leading))
     
     @AppStorage("currentUserSignIn") var currentUserSignIn: Bool = false
+    @AppStorage("userCompletedOnBoarding") var userCompletedOnBoarding: Bool = false
+    @AppStorage("userOnLoginScreen") var userOnLoginScreen: Bool = false
     
     var body: some View {
         ZStack {
@@ -81,6 +83,17 @@ extension OnboardingView {
             withAnimation(.spring()) {
                 onboardingState += 1
             }
+            
+            if onboardingState == 3 {
+                userCompletedOnBoarding = true
+                userOnLoginScreen = true
+            }
+            
+            if onboardingState == 4 {
+                userOnLoginScreen = false
+            }
+            
+            
         }
     }
 }

@@ -9,13 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var loginViewState: Int = 3
+    @State var signupViewState: Int = 4
     @AppStorage("currentUserSignIn") var currentUserSignIn: Bool = false
+    @AppStorage("userCompletedOnBoarding") var userCompletedOnBoarding: Bool = false
+    @AppStorage("userOnLoginScreen") var userOnLoginScreen: Bool = false
     
     var body: some View {
         ZStack {
             Color("BackgroundColor").ignoresSafeArea()
             if currentUserSignIn {
                 MainView()
+            } else if userCompletedOnBoarding {
+                if userOnLoginScreen {
+                    LoginView(onBoardingState: $loginViewState)
+                        .transition(.move(edge: .trailing))
+                } else {
+                    SignUpView(onBoardingState: $signupViewState)
+                        .transition(.move(edge: .trailing))
+                }
+                
             } else {
                 OnboardingView()
                     .transition(.move(edge: .trailing))
