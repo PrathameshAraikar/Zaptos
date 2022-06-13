@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+
 
 struct DescriptionView: View {
-
+    
+    let db = Firestore.firestore()
+    
+    
     @EnvironmentObject var vm: ShoeViewModel
     @State var showConfirmation: Bool = false
     @State var shoeSize: Int = 0
@@ -89,25 +95,25 @@ struct DescriptionView: View {
                 .padding(.leading, 25)
                 .padding(.bottom, 90)
                 
-//                HStack {
-//                    Text("Quantity: ")
-//                        .font(.title2)
-//                        .foregroundColor(.white)
-//
-//                    Text("\(quantity)")
-//                        .font(.title2)
-//                        .foregroundColor(.white)
-//                        .fontWeight(.semibold)
-//                        .padding(.trailing, 50)
-//
-//                    Stepper(value: $quantity, in: 1...10) {}
-//                        .frame(width: 95)
-//                        .background(Color.accentColor)
-//                        .cornerRadius(10)
-//
-//                    Spacer()
-//                }
-//                .padding(.leading, 25)
+                HStack {
+                    Text("Quantity: ")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                    
+                    Text("\(quantity)")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                        .fontWeight(.semibold)
+                        .padding(.trailing, 50)
+                    
+                    Stepper(value: $quantity, in: 1...10) {}
+                        .frame(width: 95)
+                        .background(Color.accentColor)
+                        .cornerRadius(10)
+                    
+                    Spacer()
+                }
+                .padding(.leading, 25)
                 
                 Button {
                     showConfirmation.toggle()
@@ -125,12 +131,7 @@ struct DescriptionView: View {
                 }
                 .confirmationDialog("Are You Sure?", isPresented: $showConfirmation, titleVisibility: .visible) {
                     Button(role: .none) {
-                        vm.shoesInCart?.append(
-                            ShoeModel(imageurl: shoe.imageurl,
-                                      price: shoe.price,
-                                      title: shoe.title,
-                                      shoeSize: (shoeSize + 5),
-                                      quantity: quantity))
+                        addDataToFirebase(shoe: shoe)
                     } label: {
                         Text("OK")
                     }
@@ -138,6 +139,30 @@ struct DescriptionView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+    
+    func addDataToFirebase(shoe: ShoeModel) {
+        //        vm.shoesInCart?.append(ShoeModel(imageurl: shoe.imageurl, price: shoe.price, title: shoe.title, shoeSize: (shoeSize + 5), quantity: quantity))
+        
+        let auth = Auth.auth()
+        let currentUser = auth.currentUser
+        
+        db.collection("All Carts").document(currentUser!.uid + "_cart").collection("cart").addDocument(data: [
+            "imageurl": shoe.imageurl,
+            "price": shoe.price,
+            "title": shoe.title,
+            "shoeSize": (shoeSize + 5),
+            "quantity": quantity
+            
+        ]) { error in
+            if let e = error {
+                print(e.localizedDescription)
+                print("There was an error in saving the data in Firestore")
+            } else {
+                print("Successfully saved data")
+            }
+        }
+        
     }
 }
 
@@ -149,5 +174,5 @@ struct DescriptionView_Previews: PreviewProvider {
                                                      price: "₹13,495", title: "NikeCourt Zoom Vapor Cage 4 Rafa", shoeSize: nil, quantity: nil))
         .environmentObject(ShoeViewModel())
     }
-        
+    
 }

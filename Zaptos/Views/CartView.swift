@@ -6,29 +6,66 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct CartView: View {
     
+    @State var cartArray: [ShoeModel] = []
+    let db = Firestore.firestore()
     @EnvironmentObject var vm: ShoeViewModel
     
     var body: some View {
         ZStack {
             Color("BackgroundColor").ignoresSafeArea()
-            if let cartShoes =  vm.shoesInCart {
-                if cartShoes.isEmpty {
+                if cartArray.isEmpty {
                     EmptyCartView()
                 } else {
                     ScrollView(.vertical, showsIndicators: true) {
-                        ForEach(cartShoes, id: \.id) { shoe in
+                        ForEach(cartArray, id: \.id) { shoe in
                             CartCardView(shoe: shoe)
                                 .padding(.bottom)
-
+                        }
+                    }
+                }
+        }
+        .navigationTitle("Cart")
+        .onAppear {
+            loadData()
+        }
+    }
+    
+     func loadData() {
+        let auth = Auth.auth()
+        let currentUser = auth.currentUser
+        
+        db.collection("All Carts").document(currentUser!.uid + "_cart").collection("cart").addSnapshotListener { querySnapshot, error in
+            
+            cartArray = []
+            if let e = error {
+                print("There was an error in retrieving data \(e.localizedDescription)")
+            } else {
+                if let snapshotDocuments = querySnapshot?.documents {
+                    for doc in snapshotDocuments {
+                        let data = doc.data()
+                        if
+                            let imageurl = data["imageurl"] as? String,
+                            let price = data["price"] as? String,
+                            let title = data["title"] as? String,
+                            let shoeSize = data["shoeSize"] as? Int,
+                            let quantity = data["quantity"] as? Int
+                                
+                        {
+                            let newShoe = ShoeModel(imageurl: imageurl, price: price, title: title, shoeSize: shoeSize, quantity: quantity, id: UUID().uuidString)
+                            
+                            self.cartArray.append(newShoe)
+                        } else {
+                            print("Error printing data!!")
                         }
                     }
                 }
             }
         }
-        .navigationTitle("Cart")
     }
 }
 

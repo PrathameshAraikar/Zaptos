@@ -17,6 +17,10 @@ struct LoginView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var showPassword: Bool = false
+    @State var showEmailAlert: Bool = false
+    @State var showPasswordAlert: Bool = false
+    @State var emailAlertTitle: String = ""
+    @State var passwordAlertTitle: String = ""
     
     var body: some View {
         ZStack {
@@ -67,6 +71,7 @@ struct LoginView: View {
                                 .padding()
                                 .disableAutocorrection(true)
                                 .textInputAutocapitalization(.never)
+                                
                             
                             Divider()
                             
@@ -133,7 +138,11 @@ struct LoginView: View {
                             Spacer()
                             
                             Button {
-                                handleLoginButtonPressed()
+                                emailAlertTitle = handleEmailAlert()
+                                passwordAlertTitle = handlePasswordAlert()
+                                if emailAlertTitle == "" && passwordAlertTitle == "" {
+                                    handleLoginButtonPressed()
+                                }
                             } label: {
                                 Text("Login")
                                     .foregroundColor(Color("BackgroundColor"))
@@ -146,6 +155,10 @@ struct LoginView: View {
                                     .shadow(radius: 10)
                                     .padding(.vertical)
                             }
+                            .alert(emailAlertTitle, isPresented: $showEmailAlert) {}
+                            .alert(passwordAlertTitle, isPresented: $showPasswordAlert) {}
+                            .alert(appvm.userDoesNotExistTitle,
+                                   isPresented: $appvm.showUserDoesNotExistAlert) {}
                             
                             Divider()
                             
@@ -181,15 +194,59 @@ struct LoginView: View {
 }
 
 extension LoginView {
+    
+    func handleEmailAlert() -> String {
+        
+        if email.isEmpty {
+            showEmailAlert.toggle()
+            return "Please enter your email id 😭"
+        }
+        
+        if email.count < 10 {
+            showEmailAlert.toggle()
+            return "Please enter complete email id 🥺🥺🥺"
+        }
+        
+        if  !email.contains("@") {
+            showEmailAlert.toggle()
+            return "Invalid email 😢😢😢"
+        }
+        
+        return ""
+    }
+    
+    func handlePasswordAlert() -> String {
+        if password.isEmpty {
+            showPasswordAlert.toggle()
+            return "Please enter a password 😱"
+        }
+        
+        if password.count < 6 {
+            showPasswordAlert.toggle()
+            return "Password should be atleast 6 characters long 🧐🧐🧐"
+        }
+        
+        return ""
+    }
+    
     func handleLoginButtonPressed() {
         
         appvm.login(email: email, password: password)
-        
-        withAnimation(.spring()) {
-            currentUserSignIn = true
-        }
+//        withAnimation(.spring()) {
+//            currentUserSignIn = true
+//        }
+//        if appvm.isSignedIn {
+//            withAnimation(.spring()) {
+//                currentUserSignIn = true
+//            }
+//        }
+//        } else {
+//            userDoesNotExistTitle = "User doesn't exist Please Sign Up 😥😥😥"
+//            showUserDoesNotExistAlert.toggle()
+//
+//        }
     }
-    
+        
     func handleSignUpButtonPressed(onBoardingState: Int) {
         withAnimation(.spring()) {
             self.onBoardingState += 1

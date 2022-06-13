@@ -16,6 +16,10 @@ struct SignUpView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var showPassword: Bool = false
+    @State var showEmailAlert: Bool = false
+    @State var showPasswordAlert: Bool = false
+    @State var emailAlertTitle: String = ""
+    @State var passwordAlertTitle: String = ""
     
     var body: some View {
         ZStack {
@@ -133,7 +137,11 @@ struct SignUpView: View {
                             Spacer()
                             
                             Button {
-                                handleSignUpButtonPressed()
+                                emailAlertTitle = handleEmailAlert()
+                                passwordAlertTitle = handlePasswordAlert()
+                                if emailAlertTitle == "" && passwordAlertTitle == "" {
+                                    handleSignUpButtonPressed()
+                                }
                             } label: {
                                 Text("Sign Up")
                                     .foregroundColor(Color("BackgroundColor"))
@@ -146,6 +154,9 @@ struct SignUpView: View {
                                     .shadow(radius: 10)
                                     .padding(.vertical)
                             }
+                            .alert(emailAlertTitle, isPresented: $showEmailAlert) {}
+                            .alert(passwordAlertTitle, isPresented: $showPasswordAlert) {}
+                            .alert(appvm.userAlreadyExistsTitle, isPresented: $appvm.showUserAlreadyExistsAlert) {}
                             
                             Divider()
                             
@@ -182,13 +193,55 @@ struct SignUpView: View {
 
 extension SignUpView {
     
+    func handleEmailAlert() -> String {
+        
+        if email.isEmpty {
+            showEmailAlert.toggle()
+            return "Please enter your email id 😭"
+        }
+        
+        if email.count < 10 {
+            showEmailAlert.toggle()
+            return "Please enter complete email id 🥺🥺🥺"
+        }
+        
+        if  !email.contains("@") {
+            showEmailAlert.toggle()
+            return "Invalid email 😢😢😢"
+        }
+        
+        return ""
+    }
+    
+    func handlePasswordAlert() -> String {
+        if password.isEmpty {
+            showPasswordAlert.toggle()
+            return "Please enter a password 😱"
+        }
+        
+        if password.count < 6 {
+            showPasswordAlert.toggle()
+            return "Password should be atleast 6 characters long 🧐🧐🧐"
+        }
+        
+        return ""
+    }
+    
     func handleSignUpButtonPressed() {
         
         appvm.signUp(email: email, password: password)
-        
-        withAnimation(.spring()) {
-            currentUserSignIn = true
-        }
+//        withAnimation(.spring()) {
+//            currentUserSignIn = true
+//        }
+//        if appvm.isSignedIn {
+//            withAnimation(.spring()) {
+//                currentUserSignIn = true
+//            }
+//        }
+//        } else {
+//            userAlreadyExistsTitle = "The email address is already in use 🫣🫣🫣"
+//            showUserAlreadyExistsAlert.toggle()
+//        }
     }
     
     func handleLoginButtonPressed(onBoardingState: Int) {

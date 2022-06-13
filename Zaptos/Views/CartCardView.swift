@@ -11,7 +11,7 @@ struct CartCardView: View {
     
     var shoe: ShoeModel
     @State var quantity: Int = 1
-    @State var showAlert: Bool = false
+//    @State var showAlert: Bool = false
     
     var body: some View {
         ZStack {
@@ -19,7 +19,7 @@ struct CartCardView: View {
             VStack {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color.white)
-                    .frame(height: 250)
+                    .frame(height: 200)
                     .overlay {
                         let url = URL(string: shoe.imageurl)
                         
@@ -34,7 +34,7 @@ struct CartCardView: View {
                                         .frame(
                                             width: 200,
                                             height: 200)
-                                        .cornerRadius(30)
+                                        .cornerRadius(20)
                                     
                                 case .failure:
                                     Image(systemName: "questionmark")
@@ -71,7 +71,7 @@ struct CartCardView: View {
                                 
                                 HStack {
                                     Text("Quantity: ")
-                                    Text("\(quantity)")
+                                    Text("\(shoe.quantity!)")
                                         .font(.headline)
 //                                    if let quantity = shoe.quantity {
 //                                        Text("\(quantity)")
@@ -81,13 +81,13 @@ struct CartCardView: View {
                                 .foregroundColor(.black)
                                 
                                 
-                                Stepper("") {
-                                    showAlert.toggle()
-                                } onDecrement: {
-                                    if quantity > 1 {
-                                        quantity -= 1
-//                                       print(quantity)
-                                    }
+//                                Stepper("") {
+//                                    showAlert.toggle()
+//                                } onDecrement: {
+//                                    if quantity > 1 {
+//                                        quantity -= 1
+////                                       print(quantity)
+//                                    }
                                     
 //                                    if var quantity = shoe.quantity {
 //                                        if quantity > 1 {
@@ -95,34 +95,34 @@ struct CartCardView: View {
 //                                            print(quantity)
 //                                        }
 //                                    }
-                                }
-                                .frame(width: 90)
-                                .alert("Repeat last used size?",
-                                       isPresented: $showAlert) {
-                                    Button(role: .destructive) {
-                                        if quantity < 10 {
-                                            quantity += 1
-//                                            print(quantity)
-                                        }
-                                        
-//                                        if var quantity = shoe.quantity {
-//                                            if quantity < 10 {
-//                                                quantity += 1
-//                                                print(quantity)
-//                                            }
+//                                }
+//                                .frame(width: 90)
+//                                .alert("Repeat last used size?",
+//                                       isPresented: $showAlert) {
+//                                    Button(role: .destructive) {
+//                                        if quantity < 10 {
+//                                            quantity += 1
+////                                            print(quantity)
 //                                        }
-                                    } label: {
-                                        Text("Repeat Last")
-                                    }
-                                    
-                                    Button(role: .cancel) {
-                                        
-                                    } label: {
-                                        Text("Cancel")
-                                    }
-
-
-                                }
+//
+////                                        if var quantity = shoe.quantity {
+////                                            if quantity < 10 {
+////                                                quantity += 1
+////                                                print(quantity)
+////                                            }
+////                                        }
+//                                    } label: {
+//                                        Text("Repeat Last")
+//                                    }
+//
+//                                    Button(role: .cancel) {
+//
+//                                    } label: {
+//                                        Text("Cancel")
+//                                    }
+//
+//
+//                                }
 
 //                                Stepper(value: $quantity, in: 1...10) {}
 //                                    .frame(width: 90)
@@ -154,7 +154,6 @@ struct CartCardView: View {
                 }
             }
             .padding(.leading, 350)
-            
         }
     }
 }
