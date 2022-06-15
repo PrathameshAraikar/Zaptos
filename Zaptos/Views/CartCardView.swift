@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct CartCardView: View {
     
     var shoe: ShoeModel
     @State var quantity: Int = 1
-//    @State var showAlert: Bool = false
+    @State var showAlert: Bool = false
     
     var body: some View {
         ZStack {
@@ -35,6 +37,34 @@ struct CartCardView: View {
                                             width: 200,
                                             height: 200)
                                         .cornerRadius(20)
+                                        .overlay {
+                                            
+                                            VStack(alignment: .leading) {
+                                                HStack(alignment: .top) {
+                                                    Button {
+                                                        showAlert.toggle()
+                                                    } label: {
+                                                        Image(systemName: "minus.circle")
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(width: 25, height: 25)
+                                                            .foregroundColor(.red)
+                                                    }
+                                                    .alert("Are you sure?", isPresented: $showAlert) {
+                                                        Button(role: .destructive) {
+                                                            deleteShoe(shoe: shoe)
+                                                        } label: {
+                                                            Text("Delete")
+                                                        }
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
+                                                .padding()
+                                                
+                                                Spacer()
+                                            }
+                                        }
                                     
                                 case .failure:
                                     Image(systemName: "questionmark")
@@ -50,6 +80,7 @@ struct CartCardView: View {
                                     .foregroundColor(.black)
                                     .fontWeight(.bold)
                                     .padding(.bottom)
+//                                    .lineLimit(2)
                                 
                                 HStack {
                                     Text("Price: ")
@@ -140,20 +171,38 @@ struct CartCardView: View {
             }
             .padding(.horizontal)
             
-            VStack(alignment: .trailing) {
-                NavigationLink {
-                    DescriptionView(shoe: shoe)
-                } label: {
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(.gray)
-                        .padding()
-                        
+//            VStack(alignment: .trailing) {
+//                NavigationLink {
+//                    DescriptionView(shoe: shoe)
+//                } label: {
+//                    Image(systemName: "chevron.right")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 20, height: 20)
+//                        .foregroundColor(.gray)
+//                        .padding()
+//
+//                }
+//            }
+//            .padding(.leading, 350)
+        }
+    }
+    
+    func deleteShoe(shoe: ShoeModel) {
+
+        let db = Firestore.firestore()
+        let auth = Auth.auth()
+        let currentUser = auth.currentUser
+
+        withAnimation {
+            db.collection("All Carts").document(currentUser!.uid + "_cart").collection("cart").document(shoe.id).delete { error in
+                if let e = error {
+                    print(e.localizedDescription)
+                    print("Error occured deleting data")
+                } else {
+                    print("Successfully deleted data")
                 }
             }
-            .padding(.leading, 350)
         }
     }
 }

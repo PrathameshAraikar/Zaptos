@@ -59,10 +59,4 @@ class AppViewModel: ObservableObject {
         
         // Successfully Signed Out
     }
-    
-    //    func userExists() {
-    //        auth.emailalread
-    //    }
-    
-    //            guard result != nil, error == nil else { return /* The email address is already in use */ }
 }

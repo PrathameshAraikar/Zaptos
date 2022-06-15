@@ -12,9 +12,6 @@ import FirebaseFirestore
 
 struct DescriptionView: View {
     
-    let db = Firestore.firestore()
-    
-    
     @EnvironmentObject var vm: ShoeViewModel
     @State var showConfirmation: Bool = false
     @State var shoeSize: Int = 0
@@ -142,8 +139,8 @@ struct DescriptionView: View {
     }
     
     func addDataToFirebase(shoe: ShoeModel) {
-        //        vm.shoesInCart?.append(ShoeModel(imageurl: shoe.imageurl, price: shoe.price, title: shoe.title, shoeSize: (shoeSize + 5), quantity: quantity))
         
+        let db = Firestore.firestore()
         let auth = Auth.auth()
         let currentUser = auth.currentUser
         
@@ -152,7 +149,8 @@ struct DescriptionView: View {
             "price": shoe.price,
             "title": shoe.title,
             "shoeSize": (shoeSize + 5),
-            "quantity": quantity
+            "quantity": quantity,
+            "id": shoe.id
             
         ]) { error in
             if let e = error {

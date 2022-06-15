@@ -37,9 +37,9 @@ struct CartView: View {
     
      func loadData() {
         let auth = Auth.auth()
-        let currentUser = auth.currentUser
+        let currentUser = auth.currentUser?.uid ?? ""
         
-        db.collection("All Carts").document(currentUser!.uid + "_cart").collection("cart").addSnapshotListener { querySnapshot, error in
+        db.collection("All Carts").document(currentUser + "_cart").collection("cart").addSnapshotListener { querySnapshot, error in
             
             cartArray = []
             if let e = error {
@@ -47,16 +47,19 @@ struct CartView: View {
             } else {
                 if let snapshotDocuments = querySnapshot?.documents {
                     for doc in snapshotDocuments {
+//                        print(doc.documentID)
+//                        let itemId = doc.documentID
                         let data = doc.data()
                         if
                             let imageurl = data["imageurl"] as? String,
                             let price = data["price"] as? String,
                             let title = data["title"] as? String,
                             let shoeSize = data["shoeSize"] as? Int,
-                            let quantity = data["quantity"] as? Int
+                            let quantity = data["quantity"] as? Int,
+                            let itemId = doc.documentID as? String
                                 
                         {
-                            let newShoe = ShoeModel(imageurl: imageurl, price: price, title: title, shoeSize: shoeSize, quantity: quantity, id: UUID().uuidString)
+                            let newShoe = ShoeModel(imageurl: imageurl, price: price, title: title, shoeSize: shoeSize, quantity: quantity, id: itemId)
                             
                             self.cartArray.append(newShoe)
                         } else {
