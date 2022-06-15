@@ -16,6 +16,7 @@ struct DescriptionView: View {
     @State var showConfirmation: Bool = false
     @State var shoeSize: Int = 0
     @State var quantity: Int = 1
+    @State var cartArray: [Int] = []
     let shoe: ShoeModel
     
     var body: some View {
@@ -59,7 +60,7 @@ struct DescriptionView: View {
                 
                 HStack {
                     Text("Total price: ")
-                    Text(shoe.price)
+                    Text("₹\(shoe.price)")
                         .fontWeight(.semibold)
                     Spacer()
                 }
@@ -129,6 +130,8 @@ struct DescriptionView: View {
                 .confirmationDialog("Are You Sure?", isPresented: $showConfirmation, titleVisibility: .visible) {
                     Button(role: .none) {
                         addDataToFirebase(shoe: shoe)
+                        cartArray.append(shoe.price * quantity)
+                        vm.calculateTotalAmountAdd(cartArray: cartArray)
                     } label: {
                         Text("OK")
                     }
@@ -138,6 +141,8 @@ struct DescriptionView: View {
         }
     }
     
+    
+    
     func addDataToFirebase(shoe: ShoeModel) {
         
         let db = Firestore.firestore()
@@ -146,7 +151,7 @@ struct DescriptionView: View {
         
         db.collection("All Carts").document(currentUser!.uid + "_cart").collection("cart").addDocument(data: [
             "imageurl": shoe.imageurl,
-            "price": shoe.price,
+            "price": (shoe.price * quantity),
             "title": shoe.title,
             "shoeSize": (shoeSize + 5),
             "quantity": quantity,
@@ -169,7 +174,7 @@ struct DescriptionView: View {
 struct DescriptionView_Previews: PreviewProvider {
     static var previews: some View {
         DescriptionView(shoeSize: 7, shoe: ShoeModel(imageurl: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/2038d7ff-8926-4d65-a014-6d7151588e4f/nikecourt-zoom-vapor-cage-4-rafa-hard-court-tennis-shoes-cS7wct.png",
-                                                     price: "₹13,495", title: "NikeCourt Zoom Vapor Cage 4 Rafa", shoeSize: nil, quantity: nil))
+                                                     price: 13495, title: "NikeCourt Zoom Vapor Cage 4 Rafa", shoeSize: nil, quantity: nil))
         .environmentObject(ShoeViewModel())
     }
     

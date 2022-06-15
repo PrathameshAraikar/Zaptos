@@ -11,9 +11,12 @@ import FirebaseFirestore
 
 struct CartCardView: View {
     
+    @EnvironmentObject var vm: ShoeViewModel
     var shoe: ShoeModel
     @State var quantity: Int = 1
     @State var showAlert: Bool = false
+    @State var cartArray: [Int] = []
+    
     
     var body: some View {
         ZStack {
@@ -24,7 +27,6 @@ struct CartCardView: View {
                     .frame(height: 200)
                     .overlay {
                         let url = URL(string: shoe.imageurl)
-                        
                         HStack {
                             AsyncImage(url: url) { phase in
                                 switch phase {
@@ -33,12 +35,9 @@ struct CartCardView: View {
                                 case .success(let returnedImage):
                                     returnedImage
                                         .resizable()
-                                        .frame(
-                                            width: 200,
-                                            height: 200)
+                                        .frame(width: 200,height: 200)
                                         .cornerRadius(20)
                                         .overlay {
-                                            
                                             VStack(alignment: .leading) {
                                                 HStack(alignment: .top) {
                                                     Button {
@@ -53,11 +52,12 @@ struct CartCardView: View {
                                                     .alert("Are you sure?", isPresented: $showAlert) {
                                                         Button(role: .destructive) {
                                                             deleteShoe(shoe: shoe)
+                                                            cartArray.append(shoe.price)
+                                                            vm.calculateTotalAmountSubtract(cartArray: cartArray)
                                                         } label: {
                                                             Text("Delete")
                                                         }
                                                     }
-                                                    
                                                     Spacer()
                                                 }
                                                 .padding()
@@ -85,7 +85,7 @@ struct CartCardView: View {
                                 HStack {
                                     Text("Price: ")
                                     
-                                    Text(shoe.price)
+                                    Text("₹\(shoe.price)")
                                         .font(.headline)
                                 }
                                 .foregroundColor(.black)
@@ -210,6 +210,7 @@ struct CartCardView: View {
 struct CartCardView_Previews: PreviewProvider {
     static var previews: some View {
             CartCardView(shoe: ShoeModel(imageurl: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/2038d7ff-8926-4d65-a014-6d7151588e4f/nikecourt-zoom-vapor-cage-4-rafa-hard-court-tennis-shoes-cS7wct.png",
-                price: "₹13,495", title: "NikeCourt Zoom Vapor Cage 4 Rafa", shoeSize: 10, quantity: 1))
+                price: 13495, title: "NikeCourt Zoom Vapor Cage 4 Rafa", shoeSize: 10, quantity: 1))
+            .environmentObject(ShoeViewModel())
     }
 }

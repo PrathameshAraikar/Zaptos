@@ -12,6 +12,7 @@ import FirebaseFirestore
 struct CartView: View {
     
     @State var cartArray: [ShoeModel] = []
+    @State var totalAmountArray: [Int] = []
     let db = Firestore.firestore()
     @EnvironmentObject var vm: ShoeViewModel
     
@@ -25,6 +26,35 @@ struct CartView: View {
                         ForEach(cartArray, id: \.id) { shoe in
                             CartCardView(shoe: shoe)
                                 .padding(.bottom)
+                        }
+                        
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Text("Total Amount: ")
+                                Spacer()
+    //                            Text("₹\(10000)")
+                                    Text("₹\(vm.totalAmount)")
+                                    .fontWeight(.semibold)
+                            }
+                            .font(.title2)
+                            .foregroundColor(.accentColor)
+                            .padding()
+                            
+                            NavigationLink {
+                                Text("CHECKOUT SCREEN")
+                            } label: {
+                                Text("Checkout")
+                                    .foregroundColor(Color("BackgroundColor"))
+                                    .font(.system(size: 22))
+                                    .fontWeight(.semibold)
+                                    .frame(height: 55)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color("DP Color"))
+                                    .cornerRadius(10)
+                                    .shadow(radius: 10)
+                            }
+                            .padding()
                         }
                     }
                 }
@@ -52,7 +82,7 @@ struct CartView: View {
                         let data = doc.data()
                         if
                             let imageurl = data["imageurl"] as? String,
-                            let price = data["price"] as? String,
+                            let price = data["price"] as? Int,
                             let title = data["title"] as? String,
                             let shoeSize = data["shoeSize"] as? Int,
                             let quantity = data["quantity"] as? Int,
@@ -62,6 +92,7 @@ struct CartView: View {
                             let newShoe = ShoeModel(imageurl: imageurl, price: price, title: title, shoeSize: shoeSize, quantity: quantity, id: itemId)
                             
                             self.cartArray.append(newShoe)
+//                            calculateTotalAmountAdd(cartArray: cartArray)
                         } else {
                             print("Error printing data!!")
                         }
@@ -69,6 +100,28 @@ struct CartView: View {
                 }
             }
         }
+         
+         db.collection("All Carts").document(currentUser + "_cart").collection("totalAmount").order(by: "timestamp", descending: true).addSnapshotListener { querySnapshot, error in
+             
+             vm.totalAmount = 0
+             totalAmountArray = []
+             if let e = error {
+                 print("There was an error in retrieving data \(e.localizedDescription)")
+             } else {
+                 if let snapshotDocuments = querySnapshot?.documents {
+                     for doc in snapshotDocuments {
+                         let data = doc.data()
+                         if let t_amount = data["total_amount"] as? Int {
+                             self.totalAmountArray.append(t_amount)
+                             vm.totalAmount = totalAmountArray.first ?? 0
+//                             print(totalAmountArray)
+                         } else {
+                             print("Error getting total amount")
+                         }
+                     }
+                 }
+             }
+         }
     }
 }
 
@@ -80,6 +133,7 @@ struct CartView_Previews: PreviewProvider {
 }
 
 struct EmptyCartView: View {
+    
     var body: some View {
         VStack(alignment: .center) {
             Image(systemName: "cart.badge.plus")
