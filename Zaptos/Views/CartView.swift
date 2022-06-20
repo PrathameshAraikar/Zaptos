@@ -42,7 +42,8 @@ struct CartView: View {
                             .padding()
                             
                             NavigationLink {
-                                Text("CHECKOUT SCREEN")
+//                                ShippingDetailsView()
+                                PaymentView()
                             } label: {
                                 Text("Checkout")
                                     .foregroundColor(Color("BackgroundColor"))
@@ -66,8 +67,7 @@ struct CartView: View {
     }
     
      func loadData() {
-        let auth = Auth.auth()
-        let currentUser = auth.currentUser?.uid ?? ""
+        let currentUser = Auth.auth().currentUser?.uid ?? ""
         
         db.collection("All Carts").document(currentUser + "_cart").collection("cart").addSnapshotListener { querySnapshot, error in
             
