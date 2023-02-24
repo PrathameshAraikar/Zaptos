@@ -15,6 +15,6 @@ ZAPTOS uses the MVVM (Model-View-ViewModel) architecture pattern for code organi
 
 The `AppViewModel` handles the app's authentication and user-related logic. It uses Firebase Auth to manage user authentication and includes methods for signing up, logging in, and logging out. It also uses Combine to publish changes to the app's state.
 
-The PaymentViewModel retrieves the payment link from the app's backend server and publishes changes to the app's state using Combine. It uses URLSession.DataTaskPublisher to make network requests to the server and handles errors with replaceError.
+The `PaymentViewModel` retrieves the payment link from the app's backend server and publishes changes to the app's state using Combine. It uses `URLSession.DataTaskPublisher` to make network requests to the server and handles errors with `replaceError`.
 
-The ShoeViewModelCombine retrieves shoe data from the app's backend server and publishes changes to the app's state using Combine. It uses URLSession.DataTaskPublisher to make network requests to the server and handles errors with replaceError.
+The `ShoeViewModelCombine` retrieves shoe data from the app's backend server and publishes changes to the app's state using Combine. It uses `URLSession.DataTaskPublisher` to make network requests to the server and handles errors with `replaceError`.
