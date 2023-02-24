@@ -9,7 +9,6 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 
-
 struct DescriptionView: View {
     
     @EnvironmentObject var vm: ShoeViewModel
@@ -76,7 +75,7 @@ struct DescriptionView: View {
                             Text("\(size)")
                                 .font(.title2)
                                 .fontWeight(.semibold)
-                                .foregroundColor(.white)
+//                                .foregroundColor(.white)
                                 .tag("\(size)")
                         }
                     } label: {

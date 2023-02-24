@@ -144,37 +144,18 @@ struct CreditDebitButtonView: View {
     
     let vm: PaymentViewModel
     @Environment(\.openURL) var openURL
-    
+
     var body: some View {
-        
-//        Link(destination: URL(string: vm.paymentLink.url) ?? URL(string: "https://www.google.co.in")!) {
-//            PaymentOptionsView(title: "Credit/Debit Card", imageName: "creditcard")
-//        }
-//        .padding(.bottom)
-//        .onTapGesture {
-//            print("Tapped")
-//            vm.getPaymentLink()
-//        }
-        
         Button {
             vm.getPaymentLink()
             print(vm.paymentLink.url)
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 openURL(URL(string: vm.paymentLink.url) ?? URL(string: "https://www.google.co.in")!)
             }
-            
         } label: {
             PaymentOptionsView(title: "Credit/Debit Card", imageName: "creditcard")
-//            Text("")
         }
         .padding(.bottom)
-
-//        NavigationLink {
-//            Text("Card Screen")
-//        } label: {
-//            PaymentOptionsView(title: "Credit/Debit Card", imageName: "creditcard")
-//        }
-//        .padding(.bottom)
     }
 }
 
