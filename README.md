@@ -1,6 +1,15 @@
 # ZAPTOS
 ZAPTOS is a shoe marketplace app that allows users to browse and purchase shoes from popular brands such as Adidas, Nike, and Puma. The app also includes a payment system powered by Stripe for secure transactions.
 
+## Technologies
+
+- Swift
+- SwiftUI
+- Combine
+- Firebase Authentication
+- Firebase Firestore
+- Heroku
+
 ## Features
 
 - Authentication system powered by Firebase Auth
